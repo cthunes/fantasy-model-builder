@@ -1,0 +1,19 @@
+Package: fantasyresearch
+Type: Package
+Title: Fantasy Football Projected Points Model Builder
+Version: 0.1.0
+Authors@R: c(
+    person(
+      "Carter", "Thunes",
+      email = "carter.s.thunes@gmail.com",
+      role = c("aut", "cre")
+    )
+  )
+Description: Takes in a decade of fantasy football data and builds linear models
+    for each of the six main position types to predict mean and total fantasy 
+    points.
+License: None
+Encoding: UTF-8
+LazyData: true
+Depends: 
+    R (>= 3.5)
