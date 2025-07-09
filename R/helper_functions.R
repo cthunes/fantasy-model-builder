@@ -30,7 +30,11 @@ m <- function(form, dat, pred, num = 5000) {
 }
 
 
-
+# Selects terms upwards (starting with no terms instead of all terms) up to min
+# of max_terms or 25 observations per term. Steps all possible models with with
+# olsrr package. Calculates scores for each of the best models (1 of each number
+# of parameters). Normalizes and ranks each column of values to create a standardized
+# "avg_score" to determine the best model. Returns table of best models.
 step_upwards <- function(dat, pred, max_terms = 16, num = 5000) {
   cols <- colnames(dat)[!grepl("Player|TEAM|POS|_act|proj_|INJCOR|year", colnames(dat))]
   terms <- c()
@@ -116,7 +120,8 @@ step_upwards <- function(dat, pred, max_terms = 16, num = 5000) {
 }
 
 
-
+# Prints to console a formula to be copy-pasted into Python code of the chosen
+# linear models.
 generate_python_formula <- function(lm_obj, output_var = "proj_y", df_name = "df") {
   coefs <- coef(lm_obj)
   terms <- names(coefs)
