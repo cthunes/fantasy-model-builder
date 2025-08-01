@@ -26,3 +26,14 @@ generate_python_formula(tot, output_var = "proj_HALF")
 # save step_upward runs
 usethis::use_data(mean_wr, overwrite = TRUE)
 usethis::use_data(tot_wr, overwrite = TRUE)
+
+
+
+dat <- wr |> filter(G >= 10 & G_act >= 10 & OPP_mean_act >= 5) |> select(-contains(c("FPTS", "PPR", "DPCHT")))
+cors1 <- cor(dat[4:(length(dat)/2)], dat$HALF_mean_act) |> as.data.frame()
+cors2 <- cor(dat[4:(length(dat)/2)], dat$HALF_act) |> as.data.frame()
+cors <- rbind(cors1, cors2)
+cors <- cors |> arrange(-V1)
+View(cors)
+
+wr |> filter(G >= 6 & OPP_mean >= 4) |> group_by(year) |> summarize(n = n())
